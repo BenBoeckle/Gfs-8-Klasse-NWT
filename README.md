@@ -33,9 +33,9 @@ GFS Klasse 8 - Mikrokontroller gesteuertes Auto
 ### Auto
 - Motor Ansteuerung
 - Abstandsensor
-- + Wifi
-- + AppSteuerung
-  - Geschwindkeit über App
+- Wifi
+- AppSteuerung
+- Geschwindkeit über App
 - Lenkung über App
  
 
