@@ -26,7 +26,7 @@ https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
 ### Abstandssensor
 - Ultraschall
 - Messung start mit Trigger (digital Ausgang)
-- Sensor Mist Zeit für Schall hin und zurück, danach Ausgabe an digitalem Ausgang (Eingang für Mikrokontroller 
+- Sensor misst Zeit für Schall hin und zurück, danach Ausgabe an digitalem Ausgang (Eingang für Mikrokontroller 
 - High Signal solange das Signal gebraucht hat
 - Messen der Zeit am Eingangs Pin (Echo) und über Schallgeschwindigkeit umrechnen in Abstand
 - V = s/t  --> s = V*t  (Schallgeschwindigkeit * gemessene Zeit) / 2 (2 wegen hin und zurück)
