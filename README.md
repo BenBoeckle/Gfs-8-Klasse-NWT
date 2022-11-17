@@ -4,7 +4,7 @@ GFS Klasse 8 - Mikrokontroller gesteuertes Auto
 
 ## Präsentation Themen
 
-### Eigenschaften, überblick
+### Eigenschaften, Überblick
 - Basic Stamp
 - Arduino
 - ESP32 (Arduino kompatibel + WLAN + Bluetooth)
