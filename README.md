@@ -2,6 +2,10 @@
 
 GFS Klasse 8 - Mikrokontroller gesteuertes Auto 
 
+App and ESP32 SW:
+https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
+
+
 ## Präsentation Themen
 
 ### Eigenschaften, Überblick
