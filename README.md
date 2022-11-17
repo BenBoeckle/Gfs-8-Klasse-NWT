@@ -2,7 +2,10 @@
 
 GFS Klasse 8 - Mikrokontroller gesteuertes Auto 
 
-App and ESP32 SW:
+Arduino SW -- > Github
+https://github.com/BenBoeckle/Gfs-8-Klasse-NWT.git
+
+App and ESP32 Code --> Azure DevOps
 https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
 
 
@@ -41,5 +44,3 @@ https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
 - AppSteuerung
 - Geschwindkeit über App
 - Lenkung über App
- 
-
