@@ -30,6 +30,8 @@ https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
 - High Signal solange das Signal gebraucht hat
 - Messen der Zeit am Eingangs Pin (Echo) und über Schallgeschwindigkeit umrechnen in Abstand
 - V = s/t  --> s = V*t  (Schallgeschwindigkeit * gemessene Zeit) / 2 (2 wegen hin und zurück)
+  - Schallgeschwindigkeit: 343m/s
+  - s= 343m/s * Zeit in Mikrosekunden --> 343 * 100[-->cm] / 1000000 [-->us] * Zeit = s in cm
 
 ### GFS: Motor
 - Nicht direkt an Mikrokontroller (über LD293)
