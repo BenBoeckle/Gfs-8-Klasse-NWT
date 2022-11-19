@@ -57,8 +57,9 @@ https://www.elektronik-kompendium.de/sites/kom/0401111.htm
 ### GFS Auto - WilhelmiCar
 - Motor Ansteuerung
 - Abstandsensor
-- Wifi
-- AppSteuerung
-- Geschwindkeit über App
-- Lenkung über App
+- Zusätzlich
+  - Wifi
+  - AppSteuerung
+  - Geschwindkeit/Lenkung über App
+
 
