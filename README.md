@@ -42,7 +42,7 @@ https://www.elektronik-kompendium.de/sites/kom/0401111.htm
 - Nicht direkt an Mikrokontroller (über LD293)
   - Zu wenig Strom
   - Art der Belastung zerstört Mikrokontroller (induktive Last)
-- Vorwärts/rückwärts möglich mit LD293
+- Vorwärts/rückwärts möglich mit L293D
 - Geschwindigkeit --> PWM
 
 ### GFS: Labor Aufbau
