@@ -27,6 +27,7 @@ https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
 - Analog Ausgabe = PWM !!
 
 ### GFS: Abstandssensor
+https://create.arduino.cc/projecthub/abdularbi17/ultrasonic-sensor-hc-sr04-with-arduino-tutorial-327ff6
 - Ultraschall
 - Messung start mit Trigger (digital Ausgang)
 - Sensor misst Zeit für Schall hin und zurück, danach Ausgabe an digitalem Ausgang (Eingang für Mikrokontroller 
@@ -37,6 +38,7 @@ https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
   - s= 343m/s * Zeit in Mikrosekunden --> 343 * 100[-->cm] / 1000000 [-->us] * Zeit / 2 = s in cm
 
 ### GFS: Motor
+https://www.elektronik-kompendium.de/sites/kom/0401111.htm
 - Nicht direkt an Mikrokontroller (über LD293)
   - Zu wenig Strom
   - Art der Belastung zerstört Mikrokontroller (induktive Last)
