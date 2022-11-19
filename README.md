@@ -1,6 +1,9 @@
 # Gfs-8-Klasse-NWT
 
-GFS Klasse 8 - Mikrokontroller gesteuertes Auto 
+![alt text](WilhelmiCarLogo.png?raw=true)
+
+GFS Klasse 8 -  
+Mikrokontroller gesteuertes Auto basierend auf Arduino Software. Inklusive Blazor App/WebApp Steuerung.
 
 Web App Steuerung: 
 https://wilhelmicar-web.azurewebsites.net
