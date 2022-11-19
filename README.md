@@ -43,6 +43,7 @@ https://www.elektronik-kompendium.de/sites/kom/0401111.htm
   - Zu wenig Strom
   - Art der Belastung zerstört Mikrokontroller (induktive Last)
 - Vorwärts/rückwärts möglich mit L293D
+  - 4 Motoren oder 2x Vorwärts/Rückwärts
 - Geschwindigkeit --> PWM
 
 ### GFS: Labor Aufbau
