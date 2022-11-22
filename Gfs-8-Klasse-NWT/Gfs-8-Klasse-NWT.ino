@@ -22,7 +22,7 @@ void setup()
 {
   // put your setup code here, to run once:
   pinMode(TASTE_START_AUTOMATISCH, INPUT_PULLUP);
-  
+
   // Abstandssensor
   pinMode(TRIGGER, OUTPUT);
   pinMode(ECHO, INPUT);
@@ -39,18 +39,30 @@ void setup()
   pinMode(MOTOR_LENKUNG2, OUTPUT);
   
   Serial.begin(115200); 
+
+  Serial.println("Starting up version 1.0");
 }
 
 void loop() 
 {
-  unsigned long StopLenkungZeit = 0;
   // put your main code here, to run repeatedly:
-  int Taste1 = digitalRead(TASTE_START_AUTOMATISCH);
+  bool autoAktiv = false;
+  unsigned long AbstandsAusgabeZeit = 0;
+  unsigned long AbstandsZeit = 0;
+  unsigned long StopLenkungZeit = 0;
+
+
+ 
+
+  Serial.println("Waiting for start....");
+
  
   // Warte bis Start gedrückt wird
-  while (Taste1 == HIGH )
+  while (digitalRead(TASTE_START_AUTOMATISCH) == HIGH )
   {
   }
+  Serial.println("****Automode started****");
+  autoAktiv = true;
   delay(1000);
 
   digitalWrite(OUTPUT_ABSTAND, LOW);
@@ -61,62 +73,83 @@ void loop()
   digitalWrite(MOTOR_LENKUNG2, LOW);
 
 
-  int Geschwindigkeit = 200; //analogRead(GESCHWINDIGKEIT) / 4;
+  int Geschwindigkeit = 230; //analogRead(GESCHWINDIGKEIT) / 4;
   analogWrite(PWM_RICHTUNG, Geschwindigkeit);
   digitalWrite(MOTOR_RICHTUNG1, HIGH);
   digitalWrite(MOTOR_RICHTUNG2, LOW);
 
   delay(1000);
-  analogWrite(PWM_RICHTUNG, Geschwindigkeit * 0.8);
+  analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.65);
 
 
   // Solange Taste nicht gedrückt wird
-  while (Taste1 == HIGH)
+  while (autoAktiv && digitalRead(TASTE_START_AUTOMATISCH) == HIGH)
   {
-    // Abstands Messung
-    digitalWrite(TRIGGER, LOW);
-    delayMicroseconds(2);  
-    digitalWrite(TRIGGER, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(TRIGGER, LOW);
-    long dauer = pulseIn(ECHO, HIGH);
-    long entfernung = (dauer/2) * 0.03432; 
-    if (entfernung  < 10)
+    if (micros() - AbstandsZeit > 20000)
     {
-      digitalWrite(OUTPUT_ABSTAND, HIGH);
 
-      // Zu nahe am Hindernis, anhalten
-      analogWrite(PWM_RICHTUNG, 0);
-      digitalWrite(MOTOR_RICHTUNG1, LOW);
-      digitalWrite(MOTOR_RICHTUNG2, LOW);
-    }
-    else if (entfernung  < 70)
-    {
-      digitalWrite(OUTPUT_ABSTAND, HIGH);
-      analogWrite(PWM_RICHTUNG, Geschwindigkeit * 0.85);
+      AbstandsZeit = micros();
+      
 
-      // Starte mit Lenkung
-      analogWrite(PWM_LENKUNG, 220);
-      digitalWrite(MOTOR_LENKUNG1, HIGH);
-      digitalWrite(MOTOR_LENKUNG2, LOW);
+      // Abstands Messung
+      digitalWrite(TRIGGER, LOW);
+      delayMicroseconds(2);  
+      digitalWrite(TRIGGER, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(TRIGGER, LOW);
+      long dauer = pulseIn(ECHO, HIGH);
+      long entfernung = (dauer/2) * 0.03432; 
 
-      StopLenkungZeit = micros();
-    }
-    else 
-    {
-      digitalWrite(OUTPUT_ABSTAND, LOW);
-
-      if ( micros() - StopLenkungZeit > 1200 * 1000) 
+      if (micros() - AbstandsAusgabeZeit > 1000000 )
       {
-        // Stoppe Lenkung
-        analogWrite(PWM_RICHTUNG, Geschwindigkeit * 0.8);
+        AbstandsAusgabeZeit = micros();
+        Serial.print("Abstand: ");
+        Serial.print(entfernung);
+        Serial.println("cm");
+      }
 
-        analogWrite(PWM_LENKUNG, 0);
-        digitalWrite(MOTOR_LENKUNG1, LOW);
-        digitalWrite(MOTOR_LENKUNG2, LOW);        
+      if (entfernung  < 10)
+      {
+        digitalWrite(OUTPUT_ABSTAND, HIGH);
+
+        // Zu nahe am Hindernis, anhalten
+        analogWrite(PWM_RICHTUNG, 0);
+        digitalWrite(MOTOR_RICHTUNG1, LOW);
+        digitalWrite(MOTOR_RICHTUNG2, LOW);
+        autoAktiv = false;
+      }
+      else if (entfernung  < 70)
+      {
+        digitalWrite(OUTPUT_ABSTAND, HIGH);
+        analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.85);
+
+        // Starte mit Lenkung
+        analogWrite(PWM_LENKUNG, 200);
+        digitalWrite(MOTOR_LENKUNG1, HIGH);
+        digitalWrite(MOTOR_LENKUNG2, LOW);
+
+        StopLenkungZeit = micros();
+      }
+      else 
+      {
+        digitalWrite(OUTPUT_ABSTAND, LOW);
+
+        if ( micros() - StopLenkungZeit > 1200000) 
+        {
+          // Stoppe Lenkung
+          analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.65);
+
+          analogWrite(PWM_LENKUNG, 0);
+          digitalWrite(MOTOR_LENKUNG1, LOW);
+          digitalWrite(MOTOR_LENKUNG2, LOW);        
+        }
       }
     }
   }
+
+  Serial.println("****Automode stoped!****");
+
+  digitalWrite(OUTPUT_ABSTAND, LOW);
 
   // Richtung auf stopp
   analogWrite(PWM_RICHTUNG, 0);
@@ -129,6 +162,8 @@ void loop()
   digitalWrite(MOTOR_LENKUNG1, LOW);
   digitalWrite(MOTOR_LENKUNG2, LOW);
 
+
+  delay(1000);
 
 /*
   //digitalWrite(MOTOR_RICHTUNG1, Taste1 == LOW ? HIGH : LOW);
