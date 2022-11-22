@@ -73,7 +73,7 @@ void loop()
   digitalWrite(MOTOR_LENKUNG2, LOW);
 
 
-  int Geschwindigkeit = 230; //analogRead(GESCHWINDIGKEIT) / 4;
+  int Geschwindigkeit = 200; //analogRead(GESCHWINDIGKEIT) / 4;
   analogWrite(PWM_RICHTUNG, Geschwindigkeit);
   digitalWrite(MOTOR_RICHTUNG1, HIGH);
   digitalWrite(MOTOR_RICHTUNG2, LOW);
@@ -85,7 +85,7 @@ void loop()
   // Solange Taste nicht gedrückt wird
   while (autoAktiv && digitalRead(TASTE_START_AUTOMATISCH) == HIGH)
   {
-    if (micros() - AbstandsZeit > 20000)
+    if (micros() - AbstandsZeit > 15000)
     {
 
       AbstandsZeit = micros();
@@ -118,7 +118,7 @@ void loop()
         digitalWrite(MOTOR_RICHTUNG2, LOW);
         autoAktiv = false;
       }
-      else if (entfernung  < 70)
+      else if (entfernung  < 75)
       {
         digitalWrite(OUTPUT_ABSTAND, HIGH);
         analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.85);
@@ -134,7 +134,7 @@ void loop()
       {
         digitalWrite(OUTPUT_ABSTAND, LOW);
 
-        if ( micros() - StopLenkungZeit > 1200000) 
+        if ( micros() - StopLenkungZeit > 1100000) 
         {
           // Stoppe Lenkung
           analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.65);
@@ -178,14 +178,4 @@ void loop()
     noTone(8);
   }
   */
-
-
-
-
-
-
-
-
-
-  delay(500);
 }
