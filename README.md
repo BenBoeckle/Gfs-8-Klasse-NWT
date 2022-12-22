@@ -17,6 +17,10 @@ https://boeckle.visualstudio.com/Ben%20GFS%208.%20Klasse%20NWT
 
 ## Präsentation Themen
 
+### Unterschied Basic Stamp vs. Arduino
+|  Basic Stamp | Arduino  | 
+| ... | |
+
 ### Eigenschaften, Überblick
 - Basic Stamp
 - Arduino
