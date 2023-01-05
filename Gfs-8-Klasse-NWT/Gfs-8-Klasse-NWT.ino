@@ -1,8 +1,6 @@
 
 #define TASTE_START_AUTOMATISCH 9
 
-
-
 //Abstandssensor
 #define ECHO 11
 #define TRIGGER 10
@@ -15,8 +13,6 @@
 #define PWM_LENKUNG 4
 #define MOTOR_LENKUNG1 2
 #define MOTOR_LENKUNG2 5
-
-
 
 void setup() 
 {
@@ -39,8 +35,7 @@ void setup()
   pinMode(MOTOR_LENKUNG2, OUTPUT);
   
   Serial.begin(115200); 
-
-  Serial.println("Starting up version 1.0");
+  Serial.println("Starte version 1.0");
 }
 
 void loop() 
@@ -51,10 +46,7 @@ void loop()
   unsigned long AbstandsZeit = 0;
   unsigned long StopLenkungZeit = 0;
 
-
- 
-
-  Serial.println("Waiting for start....");
+  Serial.println("Waarte auf Start....");
 
  
   // Warte bis Start gedrückt wird
@@ -79,7 +71,8 @@ void loop()
   digitalWrite(MOTOR_RICHTUNG2, LOW);
 
   delay(1000);
-  analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.65);
+  //reduziere Geschwindigkeit nach losfahren
+  analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.7);
 
 
   // Solange Taste nicht gedrückt wird
@@ -87,9 +80,7 @@ void loop()
   {
     if (micros() - AbstandsZeit > 15000)
     {
-
-      AbstandsZeit = micros();
-      
+      AbstandsZeit = micros();     
 
       // Abstands Messung
       digitalWrite(TRIGGER, LOW);
@@ -121,10 +112,10 @@ void loop()
       else if (entfernung  < 75)
       {
         digitalWrite(OUTPUT_ABSTAND, HIGH);
-        analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.85);
+        analogWrite(PWM_RICHTUNG, Geschwindigkeit);
 
         // Starte mit Lenkung
-        analogWrite(PWM_LENKUNG, 200);
+        analogWrite(PWM_LENKUNG, 245);
         digitalWrite(MOTOR_LENKUNG1, HIGH);
         digitalWrite(MOTOR_LENKUNG2, LOW);
 
@@ -137,7 +128,7 @@ void loop()
         if ( micros() - StopLenkungZeit > 1100000) 
         {
           // Stoppe Lenkung
-          analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.65);
+          analogWrite(PWM_RICHTUNG, Geschwindigkeit*0.7);
 
           analogWrite(PWM_LENKUNG, 0);
           digitalWrite(MOTOR_LENKUNG1, LOW);
@@ -151,31 +142,15 @@ void loop()
 
   digitalWrite(OUTPUT_ABSTAND, LOW);
 
-  // Richtung auf stopp
+  // Motor aus
   analogWrite(PWM_RICHTUNG, 0);
   digitalWrite(MOTOR_RICHTUNG1, LOW);
   digitalWrite(MOTOR_RICHTUNG2, LOW);
 
-
-  // Lenkung auf stopp
+  // Lenkung aus
   analogWrite(PWM_LENKUNG, 0);
   digitalWrite(MOTOR_LENKUNG1, LOW);
   digitalWrite(MOTOR_LENKUNG2, LOW);
 
-
   delay(1000);
-
-/*
-  //digitalWrite(MOTOR_RICHTUNG1, Taste1 == LOW ? HIGH : LOW);
-  digitalWrite(MOTOR_RICHTUNG2, Taste2 == LOW ? HIGH : LOW);
-
-  if (Taste1 == LOW)
-  {  
-    tone(8, 50);
-  }    
-  else
-  {
-    noTone(8);
-  }
-  */
 }
